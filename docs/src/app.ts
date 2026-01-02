@@ -16,20 +16,25 @@ const totalAmtDiv = document.querySelector(
 )! as HTMLDivElement;
 
 class Expense {
-  private static currentId = 0;
+  public static currentId = 0;
   readonly id: number;
 
   constructor(
     public type: "credit" | "debit",
     public description: string,
-    public amount: number
+    public amount: number,
+    id?: number
   ) {
-    this.id = ++Expense.currentId;
+    this.id = id !== undefined ? id : ++Expense.currentId;
   }
 }
 
 let expenseItems: Expense[] = [];
 let totalAmount: number = 0;
+
+function saveExpenses() {
+  localStorage.setItem('expenses', JSON.stringify(expenseItems));
+}
 
 function deleteExpense(id: number) {
   expenseItems = expenseItems.filter((exp) => exp.id !== id);
@@ -37,6 +42,7 @@ function deleteExpense(id: number) {
   document.querySelector(`.exp-item[data-id="${id}"]`)?.remove();
   totalAmount = calculateTotal();
   showTotal();
+  saveExpenses();
 }
 
 function renderExpense(expItem: Expense) {
@@ -96,4 +102,15 @@ addExpBtn.addEventListener("click", (e) => {
   expAmt.value = "";
   totalAmount = calculateTotal();
   showTotal();
+  saveExpenses();
 });
+
+const saved = localStorage.getItem('expenses');
+if (saved) {
+  const parsed = JSON.parse(saved);
+  expenseItems = parsed.map((exp: any) => new Expense(exp.type, exp.description, exp.amount, exp.id));
+  Expense.currentId = Math.max(...expenseItems.map(e => e.id), 0);
+  expenseItems.forEach(renderExpense);
+  totalAmount = calculateTotal();
+  showTotal();
+}

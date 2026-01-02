@@ -13,20 +13,24 @@ class Expense {
     amount;
     static currentId = 0;
     id;
-    constructor(type, description, amount) {
+    constructor(type, description, amount, id) {
         this.type = type;
         this.description = description;
         this.amount = amount;
-        this.id = ++Expense.currentId;
+        this.id = id !== undefined ? id : ++Expense.currentId;
     }
 }
 let expenseItems = [];
 let totalAmount = 0;
+function saveExpenses() {
+    localStorage.setItem('expenses', JSON.stringify(expenseItems));
+}
 function deleteExpense(id) {
     expenseItems = expenseItems.filter((exp) => exp.id !== id);
     document.querySelector(`.exp-item[data-id="${id}"]`)?.remove();
     totalAmount = calculateTotal();
     showTotal();
+    saveExpenses();
 }
 function renderExpense(expItem) {
     const containerDiv = expItem.type === "credit" ? creditDiv : debitDiv;
@@ -75,5 +79,15 @@ addExpBtn.addEventListener("click", (e) => {
     expAmt.value = "";
     totalAmount = calculateTotal();
     showTotal();
+    saveExpenses();
 });
+const saved = localStorage.getItem('expenses');
+if (saved) {
+    const parsed = JSON.parse(saved);
+    expenseItems = parsed.map((exp) => new Expense(exp.type, exp.description, exp.amount, exp.id));
+    Expense.currentId = Math.max(...expenseItems.map(e => e.id), 0);
+    expenseItems.forEach(renderExpense);
+    totalAmount = calculateTotal();
+    showTotal();
+}
 //# sourceMappingURL=app.js.map
