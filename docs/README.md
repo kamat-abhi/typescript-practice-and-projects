@@ -51,3 +51,20 @@ This folder contains external helpers and services, such as storage or API calls
 - All storage logic is in one place.
 - Controller depends on IStorageService, not on localStorage directly.
 - Can replace LocalStorageService with ApiStorageService in future without changing controller.
+
+# UI
+
+This folder contains classes that handle DOM manipulation.
+
+- UIManager.ts: Handles rendering expenses, updating credit/debit lists, and balance display.
+
+**SOLID principles followed:**
+
+- SRP: UIManager only handles view rendering.
+- OCP: UI changes debit container and credit container do not affect controller or services.
+
+**Reason**
+
+- SOLID Principle: SRP
+- All DOM manipulation is in one place.
+- UIManager only renders data, does not calculate balances or save to storage.
