@@ -84,3 +84,19 @@ This folder contains the "brain" of the application.
  - SOLID Principle: SRP + DIP
  - Handles all business rules: adding expenses, calculating balance, saving to storage, calling UI.
  - Depends only on interfaces, not concrete classes.
+
+
+# Main Entry
+main.ts wires everything together:
+
+- Instantiates storage, UI, and controller.
+- Adds event listeners for user actions.
+- Keeps main.ts free from business logic.
+
+**SOLID principles followed:**
+- SRP: main.ts only wires components, no logic.
+- DIP: Injects dependencies via interfaces.
+
+**Reason:**
+ - SRP: main.ts is just the entry point (glue).
+ - No business logic here, only instantiation and event listeners.

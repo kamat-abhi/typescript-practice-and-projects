@@ -24,6 +24,8 @@ export class UIManager {
       </div>
     </div>`;
     container.insertAdjacentHTML("beforeend", html);
+    const newItem = container.lastElementChild as HTMLElement;
+    setTimeout(() => newItem.classList.add("show"), 10);
   }
   removeExpense(id: number) {
     document.querySelector(`.exp-item[data-id="${id}"]`)?.remove();
