@@ -92,6 +92,8 @@ function showTotal() {
     totalAmtDiv.textContent = `😎 Balance: ${totalAmount} Rs..`;
   } else if (totalAmount < 0) {
     totalAmtDiv.textContent = `😱 Balance: ${totalAmount} Rs..`;
+  } else {
+    totalAmtDiv.textContent = `😐 Balance: ${totalAmount} Rs..`;
   }
 }
 

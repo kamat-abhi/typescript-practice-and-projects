@@ -73,6 +73,9 @@ function showTotal() {
     else if (totalAmount < 0) {
         totalAmtDiv.textContent = `😱 Balance: ${totalAmount} Rs..`;
     }
+    else {
+        totalAmtDiv.textContent = `😐 Balance: ${totalAmount} Rs..`;
+    }
 }
 addExpBtn.addEventListener("click", (e) => {
     e.preventDefault();
