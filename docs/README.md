@@ -68,3 +68,19 @@ This folder contains classes that handle DOM manipulation.
 - SOLID Principle: SRP
 - All DOM manipulation is in one place.
 - UIManager only renders data, does not calculate balances or save to storage.
+
+# Controllers
+This folder contains the "brain" of the application.
+
+- ExpenseTracker.ts: Manages adding expenses, updating balances, and coordinating storage & UI.
+
+**SOLID principles followed:**
+- SRP: Controller only handles business logic.
+- DIP: Depends on IStorageService and UIManager interface.
+- OCP: Adding new features does not require changing existing service/UI classes.
+
+**Reason**
+
+ - SOLID Principle: SRP + DIP
+ - Handles all business rules: adding expenses, calculating balance, saving to storage, calling UI.
+ - Depends only on interfaces, not concrete classes.
