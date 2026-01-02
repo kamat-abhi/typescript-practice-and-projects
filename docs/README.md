@@ -13,9 +13,7 @@ This folder contains interfaces which act as **contracts** for the application.
 **Reason: **
 
 - SOLID Principle: Dependency Inversion (D) + Open/Closed (O)
-
 - Controller can depend on interfaces, not concrete implementations.
-
 - Makes it easy to replace storage or expense structure later without changing the controller.
 
 # Models
@@ -32,7 +30,24 @@ This folder contains data models of the application.
 **Reason**
 
 - SOLID Principle: Single Responsibility (S)
-
 - Expense is just a data container; it has no business logic or UI code.
-
 - Keeps data separate from logic → easier to maintain.
+
+# Services
+
+This folder contains external helpers and services, such as storage or API calls.
+
+- LocalStorageService.ts: Implements IStorageService to save/load expenses in localStorage.
+
+**SOLID principles followed:**
+
+- SRP: Service only handles data persistence.
+- DIP: Controller depends on interface, not the concrete service.
+- OCP: New storage services can be added without changing controller logic.
+
+**Reason**
+
+- SOLID Principle: SRP + DIP + OCP
+- All storage logic is in one place.
+- Controller depends on IStorageService, not on localStorage directly.
+- Can replace LocalStorageService with ApiStorageService in future without changing controller.
