@@ -17,3 +17,22 @@ This folder contains interfaces which act as **contracts** for the application.
 - Controller can depend on interfaces, not concrete implementations.
 
 - Makes it easy to replace storage or expense structure later without changing the controller.
+
+# Models
+
+This folder contains data models of the application.
+
+- Expense.ts: Represents an expense object with id, description, amount, and type.
+
+**SOLID principles followed:**
+
+- SRP: Expense class has only one responsibility: storing expense data.
+- OCP: Models can be extended without changing other code.
+
+**Reason**
+
+- SOLID Principle: Single Responsibility (S)
+
+- Expense is just a data container; it has no business logic or UI code.
+
+- Keeps data separate from logic → easier to maintain.
