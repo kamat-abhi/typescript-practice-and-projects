@@ -48,12 +48,18 @@ function deleteExpense(id: number) {
 function renderExpense(expItem: Expense) {
   const containerDiv = expItem.type === "credit" ? creditDiv : debitDiv;
 
+  const icon = expItem.type === "credit" ? "💰" : "💸";
+  const sign = expItem.type === "credit" ? "+" : "-";
+
   const template = `
-    <div class="exp-item" data-id="${expItem.id}">
-      <div class="exp-desc">${expItem.description}</div>
-      <div class="exp-amount">${expItem.amount}</div>
+    <div class="exp-item ${expItem.type}" data-id="${expItem.id}">
+      <div class="exp-icon">${icon}</div>
+      <div class="exp-details">
+        <div class="exp-desc">${expItem.description}</div>
+        <div class="exp-amount">${sign}${expItem.amount} Rs</div>
+      </div>
       <div class="exp-delete">
-        <button class="delete-expense" data-id="${expItem.id}">❌</button>
+        <button class="delete-expense" data-id="${expItem.id}" title="Delete">🗑️</button>
       </div>
     </div>
   `;
