@@ -100,3 +100,16 @@ main.ts wires everything together:
 **Reason:**
  - SRP: main.ts is just the entry point (glue).
  - No business logic here, only instantiation and event listeners.
+
+
+# Architecture Flow
+
+ -  DOM
+ -  ↓
+ - UIManager
+ -  ↓
+ - ExpenseTracker (Business Logic)
+ -  ↓
+ - IStorageService
+ -  ↓
+ - LocalStorageService
